@@ -1,0 +1,28 @@
+<div class="mt-3 flex flex-col items-center justify-between gap-3">
+    <span class="text-sm text-gray-700 ">
+        Showing <span
+            class="font-semibold text-gray-900 bg-slate-300 px-2 py-1 rounded">{{((currentPage-1)*itemsPerPage)+1}}</span>
+        to <span
+            class="font-semibold text-gray-900 bg-slate-300 px-2 py-1 rounded">{{currentPage*itemsPerPage>dataArray.length?dataArray.length:currentPage*itemsPerPage}}</span>
+        of <span class="font-semibold text-gray-900 bg-slate-300 px-2 py-1 rounded">{{dataArray.length}}</span>
+        Entries
+    </span>
+    <nav aria-label="Table pagination">
+        <ul class="inline-flex items-center -space-x-px">
+            <li>
+                <button (click)="onPageChangeHandler(currentPage-1)" [disabled]="currentPage == 1"
+                    class="px-3 py-2 ml-0 leading-tight bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700
+                    disabled:text-gray-500 disabled:hover:text-gray-500 disabled:hover:cursor-not-allowed hover:cursor-pointer">Previous</button>
+            </li>
+            <li *ngFor="let i of getPaginationRange()">
+                <button (click)="onPageChangeHandler(i)"
+                    class="px-3 py-2 leading-tight text-blue-600 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
+                    [ngClass]="{'text-blue-600 bg-blue-100 hover:bg-blue-100 hover:text-blue-700': i===currentPage}">{{i}}</button>
+            </li>
+            <li>
+                <button (click)="onPageChangeHandler(currentPage+1)" [disabled]="currentPage == totalPages"
+                    class="px-3 py-2 leading-tight bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 disabled:hover:text-gray-500 disabled:hover:cursor-not-allowed disabled:text-gray-500  hover:cursor-pointer">Next</button>
+            </li>
+        </ul>
+    </nav>
+</div>

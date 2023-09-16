@@ -1,0 +1,48 @@
+<div class="relative overflow-x-auto shadow-md scrollbar-thin scrollbar-track-gray-400 scrollbar-thumb-dark-green"
+    [ngClass]="{'sm:rounded-lg' : headColor==='dark'}">
+    <table class="w-full text-sm text-left text-black border border-collapse table-auto"
+        [ngClass]="{'border-black': headColor === 'grey', 'border-gray-200' : headColor === 'dark'}">
+        <thead class="text-white bg-dark-grey"
+            [ngClass]="{'text-white bg-dark-grey': headColor === 'dark', 'text-black bg-gray-100': headColor==='grey'}">
+            <tr>
+                <th *ngFor="let data_head of table_headers; let last = last" scope="col" tableHeader
+                    [ngClass]="{'border border-black': headColor === 'grey', 'border-gray-400' : headColor === 'dark'}"
+                    class="px-2 py-1 border-l border-r overflow-hidden" [width]="data_head.colspan || 'auto'">
+                    <ng-container
+                        *ngIf="customHeadTemplates[data_head.columnId]; then custom; else notCustom"></ng-container>
+                    <ng-template #custom>
+                        <ng-container
+                            *ngTemplateOutlet="getPropFromObj(customHeadTemplates, data_head.columnId); context: { $implicit: data_head.columnAlias || data_head.columnId}">
+                        </ng-container>
+                    </ng-template>
+                    <!-- Data fetched from the data source -->
+                    <ng-template #notCustom>
+                        {{ data_head.columnAlias || data_head.columnId }}
+                    </ng-template>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data_row of dataToDisplay">
+                <td *ngFor="let data_head of table_headers"
+                    class="px-2 py-1 border-l border-r  hover:bg-gray-200 transition-all duration-300 ease-linear overflow-hidden min-w-0 border"
+                    [ngClass]="{'border-black': headColor === 'grey', 'border-gray-400' : headColor === 'dark'}">
+                    <ng-container
+                        *ngIf="customCellTemplates[data_head.columnId]; then custom; else notCustom"></ng-container>
+                    <!-- Custom Template Injection -->
+                    <ng-template #custom>
+                        <ng-container
+                            *ngTemplateOutlet="getPropFromObj(customCellTemplates, data_head.columnId); context: { $implicit: getPropFromObj(data_row, data_head.columnId) ? getPropFromObj(data_row, data_head.columnId) : data_row }">
+                        </ng-container>
+                    </ng-template>
+                    <!-- Data fetched from the data source -->
+                    <ng-template #notCustom>
+                        {{ getPropFromObj(data_row, data_head.columnId) }}
+                    </ng-template>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<app-table-pagination *ngIf="pagination" class="" [dataArray]="data" [itemsPerPage]="pageSize"
+    (onPageChange)="handlePageChange($event)"></app-table-pagination>
