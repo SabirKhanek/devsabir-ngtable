@@ -94,7 +94,7 @@ In your component template, use the `ng-table` selector to render the table:
 You can provide custom templates for headers and columns by using `ng-template` elements with the `appTableCustomHead` and `appTableCustomColumn` directives. The `appTableCustomColumn` directive allows you to define custom templates for individual table columns. When using this directive, it's important to understand how the `let-item` variable is passed based on the presence of the column property in both the `tableHeaderDefinition` and `tableData`. For example:
 
 ```html
-<app-table [dataHeadersDef]="tableHeaderDefinition" headColor="grey" [dataSource]="tableData" [pageSize]="5"
+<ng-table [dataHeadersDef]="tableHeaderDefinition" headColor="grey" [dataSource]="tableData" [pageSize]="5"
   [pagination]="true">
 
   <!-- In case you need custom markups -->
@@ -116,7 +116,7 @@ You can provide custom templates for headers and columns by using `ng-template` 
     <span class="font-semibold">{{item}}</span>
   </ng-template>
 
-</app-table>
+</ng-table>
 ```
 
 In this example, we have defined custom templates for two columns: `movie_title` and `delete`. We didn't defined `movie_ratings` custom template because we didn't needed that at all so that's why we left that to default.
