@@ -21,7 +21,7 @@ To use NgTable in your Angular project, follow these steps:
 2. Import the `NgTableModule` in your `AppModule`:
 
    ```typescript
-   import { NgTableModule } from 'NgTable';
+   import { NgTableModule } from '@devsabir/ngtable';
 
    @NgModule({
      declarations: [
@@ -43,7 +43,7 @@ To use NgTable in your Angular project, follow these steps:
 In your component, define the table header definition as an array of `TableDataHeader` objects:
 
 ```typescript
-import { TableDataHeader } from 'NgTable';
+import { TableDataHeader } from '@devsabir/ngtable';
 
 @Component({
   // ...
