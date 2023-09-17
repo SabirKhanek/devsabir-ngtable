@@ -1,0 +1,1 @@
+# @devsabir/ngtable example

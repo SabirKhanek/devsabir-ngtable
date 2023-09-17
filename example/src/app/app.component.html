@@ -1,0 +1,22 @@
+<div class="flex justify-center items-center">
+    <div class="w-1/2 mt-28">
+        <ng-table [dataHeadersDef]="tableHeaderDefinition" headColor="dark" [dataSource]="tableData" [pageSize]="5"
+            [pagination]="true">
+
+            <!-- In case you need custom markups -->
+            <!-- e.g., red colred and centered Delete Column Header (pass id defined in HeaderDef) -->
+            <ng-template appTableCustomHead="delete" let-item>
+                <span class="text-red-500 text-center block w-full">{{item}}</span>
+            </ng-template>
+
+            <!-- Custom column cells. e.g., delete button markup -->
+            <ng-template appTableCustomColumn="delete" let-item>
+                <button
+                    class="px-3 py-1 bg-transparent text-black hover:bg-red-400 hover:text-white border border-black rounded">
+                    Delete
+                </button>
+            </ng-template>
+
+        </ng-table>
+    </div>
+</div>
